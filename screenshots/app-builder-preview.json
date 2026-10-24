@@ -1,0 +1,36 @@
+{
+  "url": "http://127.0.0.1:8080/",
+  "viewports": {
+    "desktop": {
+      "width": 1280,
+      "height": 800,
+      "status": 200,
+      "title": "Máy Chọn 777",
+      "hasCanvas": false,
+      "bodyTextLen": 156,
+      "bodyTextHash": "7722565922499b6f49b9c9a92fb6ba154b7e86cb947f1c943b414c461633912f",
+      "bodyTextPrefix": "BUỔI THUYẾT TRÌNH 777 Máy chọn người lên trả lời LUCKY DRAW — MỘ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview.png"
+    },
+    "mobile": {
+      "width": 390,
+      "height": 844,
+      "status": 200,
+      "title": "Máy Chọn 777",
+      "hasCanvas": false,
+      "bodyTextLen": 156,
+      "bodyTextHash": "7722565922499b6f49b9c9a92fb6ba154b7e86cb947f1c943b414c461633912f",
+      "bodyTextPrefix": "BUỔI THUYẾT TRÌNH 777 Máy chọn người lên trả lời LUCKY DRAW — MỘ",
+      "horizontalOverflow": false,
+      "consoleErrors": [],
+      "pageErrors": [],
+      "screenshot": "/workspace/screenshots/app-builder-preview-mobile.png"
+    }
+  },
+  "brandWarnings": [],
+  "authWarnings": [],
+  "verdictFile": "/workspace/screenshots/app-builder-preview.json"
+}

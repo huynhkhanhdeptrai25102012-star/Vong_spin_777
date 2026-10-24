@@ -1,0 +1,847 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Máy Chọn Học Sinh 777 🎰</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@500;700;900&family=Be+Vietnam+Pro:wght@400;600;700;800&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --gold: #ffd700;
+      --gold-dark: #b8860b;
+      --gold-light: #ffe566;
+      --red: #e63946;
+      --bg: #0a0a12;
+      --panel: #14141f;
+      --text: #f5f5f5;
+      --muted: #9ca3af;
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      background: radial-gradient(ellipse at top, #1a1a2e 0%, #0a0a12 60%);
+      font-family: 'Be Vietnam Pro', sans-serif;
+      color: var(--text);
+      overflow-x: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 24px 16px 40px;
+    }
+
+    /* Decorative background lights */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 30%, rgba(255, 215, 0, 0.08) 0%, transparent 40%),
+        radial-gradient(circle at 80% 70%, rgba(230, 57, 70, 0.06) 0%, transparent 40%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .header {
+      text-align: center;
+      margin-bottom: 28px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .header h1 {
+      font-family: 'Orbitron', sans-serif;
+      font-size: clamp(1.6rem, 5vw, 2.6rem);
+      font-weight: 900;
+      background: linear-gradient(135deg, var(--gold-light), var(--gold), var(--gold-dark));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: 2px;
+      text-shadow: 0 0 40px rgba(255, 215, 0, 0.3);
+      margin-bottom: 6px;
+    }
+
+    .header p {
+      color: var(--muted);
+      font-size: 0.95rem;
+      font-weight: 500;
+    }
+
+    /* Main machine container */
+    .machine-wrapper {
+      position: relative;
+      z-index: 1;
+      width: 100%;
+      max-width: 520px;
+    }
+
+    .machine {
+      background: linear-gradient(180deg, #2a2410 0%, #1a1508 100%);
+      border: 4px solid var(--gold);
+      border-radius: 24px;
+      padding: 20px 18px 28px;
+      box-shadow:
+        0 0 0 6px #1a1508,
+        0 0 40px rgba(255, 215, 0, 0.25),
+        inset 0 0 60px rgba(0, 0, 0, 0.5);
+      position: relative;
+    }
+
+    .machine::before {
+      content: '';
+      position: absolute;
+      top: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60%;
+      height: 12px;
+      background: linear-gradient(90deg, transparent, var(--gold), transparent);
+      border-radius: 6px;
+      opacity: 0.6;
+    }
+
+    /* Top sign */
+    .sign {
+      background: linear-gradient(180deg, #3d2e0a, #1f1705);
+      border: 3px solid var(--gold);
+      border-radius: 12px;
+      padding: 10px 16px;
+      text-align: center;
+      margin-bottom: 18px;
+      box-shadow: inset 0 0 20px rgba(255, 215, 0, 0.15);
+    }
+
+    .sign span {
+      font-family: 'Orbitron', sans-serif;
+      font-weight: 700;
+      font-size: 1.15rem;
+      letter-spacing: 3px;
+      color: var(--gold);
+      text-shadow: 0 0 12px rgba(255, 215, 0, 0.6);
+    }
+
+    /* Reels area */
+    .reels-frame {
+      background: #0d0d14;
+      border: 3px solid var(--gold-dark);
+      border-radius: 16px;
+      padding: 14px 10px;
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+      position: relative;
+      box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.8);
+    }
+
+    .reel {
+      flex: 1;
+      max-width: 140px;
+      height: 110px;
+      background: linear-gradient(180deg, #1a1a28, #0f0f18);
+      border: 2px solid #3a3a4a;
+      border-radius: 10px;
+      overflow: hidden;
+      position: relative;
+      box-shadow: inset 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    .reel::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(
+        180deg,
+        rgba(0,0,0,0.55) 0%,
+        transparent 25%,
+        transparent 75%,
+        rgba(0,0,0,0.55) 100%
+      );
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .reel-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      transition: transform 0.05s linear;
+      will-change: transform;
+    }
+
+    .reel-item {
+      height: 110px;
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: clamp(0.85rem, 2.8vw, 1.05rem);
+      text-align: center;
+      padding: 0 6px;
+      color: #fff;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+      flex-shrink: 0;
+      line-height: 1.2;
+    }
+
+    .reel.spinning .reel-item {
+      filter: blur(1.5px);
+    }
+
+    /* Lever */
+    .lever-area {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: -20px;
+      margin-right: -8px;
+      position: relative;
+      z-index: 5;
+    }
+
+    .lever {
+      width: 36px;
+      height: 120px;
+      position: relative;
+      cursor: pointer;
+      user-select: none;
+      transition: transform 0.15s ease;
+    }
+
+    .lever:active {
+      transform: translateY(8px);
+    }
+
+    .lever.disabled {
+      cursor: not-allowed;
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
+    .lever-stick {
+      width: 14px;
+      height: 80px;
+      background: linear-gradient(90deg, #888, #ddd, #888);
+      border-radius: 7px;
+      margin: 0 auto;
+      box-shadow: 2px 0 6px rgba(0,0,0,0.4);
+      transition: height 0.2s ease;
+    }
+
+    .lever.pulled .lever-stick {
+      height: 50px;
+    }
+
+    .lever-ball {
+      width: 36px;
+      height: 36px;
+      background: radial-gradient(circle at 35% 35%, #ff6b6b, #c92a2a);
+      border-radius: 50%;
+      margin: -4px auto 0;
+      box-shadow:
+        0 4px 12px rgba(0,0,0,0.5),
+        inset 0 -4px 8px rgba(0,0,0,0.3),
+        0 0 16px rgba(230, 57, 70, 0.5);
+      border: 2px solid #8b0000;
+      transition: transform 0.2s ease;
+    }
+
+    .lever.pulled .lever-ball {
+      transform: translateY(8px);
+    }
+
+    /* Spin button (mobile friendly) */
+    .spin-btn {
+      display: none;
+      width: 100%;
+      margin-top: 18px;
+      padding: 14px;
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      color: #1a1200;
+      background: linear-gradient(180deg, var(--gold-light), var(--gold), var(--gold-dark));
+      border: none;
+      border-radius: 12px;
+      cursor: pointer;
+      box-shadow: 0 6px 20px rgba(255, 215, 0, 0.35);
+      transition: transform 0.15s, box-shadow 0.15s;
+    }
+
+    .spin-btn:hover:not(:disabled) {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 28px rgba(255, 215, 0, 0.5);
+    }
+
+    .spin-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+    }
+
+    @media (max-width: 600px) {
+      .lever-area { display: none; }
+      .spin-btn { display: block; }
+    }
+
+    /* Result panel */
+    .result-panel {
+      margin-top: 22px;
+      background: rgba(0,0,0,0.45);
+      border: 2px solid rgba(255, 215, 0, 0.3);
+      border-radius: 14px;
+      padding: 16px;
+      text-align: center;
+      min-height: 90px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .result-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+    }
+
+    .result-name {
+      font-family: 'Orbitron', sans-serif;
+      font-size: 1.6rem;
+      font-weight: 900;
+      color: var(--gold);
+      text-shadow: 0 0 20px rgba(255, 215, 0, 0.5);
+      min-height: 1.4em;
+      transition: all 0.3s;
+    }
+
+    .result-name.winner {
+      animation: pulse-gold 0.8s ease infinite alternate;
+    }
+
+    @keyframes pulse-gold {
+      from { transform: scale(1); text-shadow: 0 0 20px rgba(255, 215, 0, 0.5); }
+      to { transform: scale(1.05); text-shadow: 0 0 35px rgba(255, 215, 0, 0.9); }
+    }
+
+    .three-names {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-top: 4px;
+    }
+
+    .three-names span {
+      background: rgba(255, 215, 0, 0.12);
+      border: 1px solid rgba(255, 215, 0, 0.35);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.9rem;
+      font-weight: 600;
+    }
+
+    .three-names span.picked {
+      background: var(--red);
+      border-color: var(--red);
+      color: white;
+      animation: pop 0.4s ease;
+    }
+
+    @keyframes pop {
+      0% { transform: scale(0.7); }
+      60% { transform: scale(1.15); }
+      100% { transform: scale(1); }
+    }
+
+    /* Students list */
+    .students-section {
+      width: 100%;
+      max-width: 520px;
+      margin-top: 32px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .students-section h2 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--gold);
+      margin-bottom: 12px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .students-section h2 span {
+      background: rgba(255, 215, 0, 0.15);
+      padding: 2px 10px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+    }
+
+    .students-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
+      gap: 8px;
+    }
+
+    .student-chip {
+      background: rgba(255, 255, 255, 0.06);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 10px;
+      padding: 10px 8px;
+      text-align: center;
+      font-size: 0.88rem;
+      font-weight: 600;
+      transition: all 0.25s;
+      position: relative;
+    }
+
+    .student-chip.remaining {
+      border-color: rgba(255, 215, 0, 0.25);
+    }
+
+    .student-chip.selected {
+      opacity: 0.45;
+      text-decoration: line-through;
+      color: var(--muted);
+      background: rgba(0,0,0,0.3);
+    }
+
+    .student-chip.just-selected {
+      animation: flash-red 0.6s ease;
+    }
+
+    @keyframes flash-red {
+      0%, 100% { background: rgba(0,0,0,0.3); }
+      50% { background: rgba(230, 57, 70, 0.4); border-color: var(--red); }
+    }
+
+    /* History */
+    .history {
+      margin-top: 20px;
+      font-size: 0.85rem;
+      color: var(--muted);
+      text-align: center;
+    }
+
+    .history strong {
+      color: var(--gold);
+    }
+
+    /* Reset button */
+    .reset-btn {
+      margin-top: 24px;
+      padding: 10px 28px;
+      font-family: 'Be Vietnam Pro', sans-serif;
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid rgba(255,255,255,0.15);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .reset-btn:hover {
+      color: var(--text);
+      border-color: rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.05);
+    }
+
+    /* Confetti canvas */
+    #confetti {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 100;
+    }
+
+    /* Glow effect when spinning */
+    .machine.spinning {
+      box-shadow:
+        0 0 0 6px #1a1508,
+        0 0 60px rgba(255, 215, 0, 0.45),
+        inset 0 0 60px rgba(0, 0, 0, 0.5);
+    }
+
+    /* Footer tip */
+    .tip {
+      margin-top: 28px;
+      font-size: 0.8rem;
+      color: var(--muted);
+      text-align: center;
+      max-width: 400px;
+      line-height: 1.5;
+    }
+  </style>
+</head>
+<body>
+  <canvas id="confetti"></canvas>
+
+  <div class="header">
+    <h1>🎰 MÁY CHỌN HỌC SINH 777</h1>
+    <p>Gạt cần để chọn người trả lời câu hỏi</p>
+  </div>
+
+  <div class="machine-wrapper">
+    <div class="machine" id="machine">
+      <div class="sign">
+        <span>LUCKY PICK</span>
+      </div>
+
+      <div class="reels-frame">
+        <div class="reel" id="reel1">
+          <div class="reel-inner" id="reelInner1"></div>
+        </div>
+        <div class="reel" id="reel2">
+          <div class="reel-inner" id="reelInner2"></div>
+        </div>
+        <div class="reel" id="reel3">
+          <div class="reel-inner" id="reelInner3"></div>
+        </div>
+      </div>
+
+      <div class="lever-area">
+        <div class="lever" id="lever" title="Gạt cần để quay">
+          <div class="lever-stick"></div>
+          <div class="lever-ball"></div>
+        </div>
+      </div>
+
+      <button class="spin-btn" id="spinBtn">🎰 QUAY NGAY</button>
+
+      <div class="result-panel" id="resultPanel">
+        <div class="result-label">Người được chọn</div>
+        <div class="result-name" id="resultName">—</div>
+        <div class="three-names" id="threeNames"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="students-section">
+    <h2>Danh sách học sinh <span id="countBadge">18</span></h2>
+    <div class="students-grid" id="studentsGrid"></div>
+    <div class="history" id="history"></div>
+  </div>
+
+  <button class="reset-btn" id="resetBtn">↺ Đặt lại danh sách</button>
+
+  <p class="tip">
+    Máy sẽ quay ra 3 tên → chọn ngẫu nhiên 1 trong 3 → tên đó bị loại khỏi vòng sau.<br>
+    Dùng cho buổi thuyết trình của nhóm ✨
+  </p>
+
+  <script>
+    // ========== DATA ==========
+    const ALL_STUDENTS = [
+      "NGỌC", "ĐẠT", "MINH QUÂN", "HẢI", "MẠNH",
+      "NGUYỄN NHI", "ĐÔNG QUÂN", "PHÁT", "THƯ", "BÍCH",
+      "AN", "HOÀNG", "KIM KHÁNH", "HÂN", "DƯƠNG",
+      "KIM CHI", "BẰNG", "TÀI"
+    ];
+
+    let remaining = [...ALL_STUDENTS];
+    let selectedHistory = [];
+    let isSpinning = false;
+
+    // ========== DOM ==========
+    const reelInners = [
+      document.getElementById('reelInner1'),
+      document.getElementById('reelInner2'),
+      document.getElementById('reelInner3')
+    ];
+    const reels = [
+      document.getElementById('reel1'),
+      document.getElementById('reel2'),
+      document.getElementById('reel3')
+    ];
+    const lever = document.getElementById('lever');
+    const spinBtn = document.getElementById('spinBtn');
+    const machine = document.getElementById('machine');
+    const resultName = document.getElementById('resultName');
+    const threeNamesEl = document.getElementById('threeNames');
+    const studentsGrid = document.getElementById('studentsGrid');
+    const countBadge = document.getElementById('countBadge');
+    const historyEl = document.getElementById('history');
+    const resetBtn = document.getElementById('resetBtn');
+
+    // ========== HELPERS ==========
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    function randomPick(arr) {
+      return arr[Math.floor(Math.random() * arr.length)];
+    }
+
+    // Build a long strip of names for spinning illusion
+    function buildReelStrip(baseNames, finalName, length = 40) {
+      const strip = [];
+      const pool = baseNames.length > 0 ? baseNames : ["—"];
+      for (let i = 0; i < length - 1; i++) {
+        strip.push(randomPick(pool));
+      }
+      strip.push(finalName);
+      return strip;
+    }
+
+    function renderReel(reelInner, names) {
+      reelInner.innerHTML = names.map(n =>
+        `<div class="reel-item">${n}</div>`
+      ).join('');
+      reelInner.style.transition = 'none';
+      reelInner.style.transform = 'translateY(0)';
+    }
+
+    // ========== UI UPDATE ==========
+    function updateStudentsList() {
+      studentsGrid.innerHTML = ALL_STUDENTS.map(name => {
+        const isSelected = !remaining.includes(name);
+        return `<div class="student-chip ${isSelected ? 'selected' : 'remaining'}" data-name="${name}">${name}</div>`;
+      }).join('');
+      countBadge.textContent = remaining.length;
+
+      if (selectedHistory.length > 0) {
+        historyEl.innerHTML = `Đã chọn: <strong>${selectedHistory.join(' → ')}</strong>`;
+      } else {
+        historyEl.innerHTML = '';
+      }
+    }
+
+    function setControlsEnabled(enabled) {
+      lever.classList.toggle('disabled', !enabled);
+      spinBtn.disabled = !enabled;
+    }
+
+    // ========== SPIN LOGIC ==========
+    async function spin() {
+      if (isSpinning) return;
+      if (remaining.length === 0) {
+        resultName.textContent = "Hết học sinh!";
+        resultName.classList.remove('winner');
+        threeNamesEl.innerHTML = '';
+        return;
+      }
+
+      isSpinning = true;
+      setControlsEnabled(false);
+      machine.classList.add('spinning');
+      resultName.textContent = 'Đang quay...';
+      resultName.classList.remove('winner');
+      threeNamesEl.innerHTML = '';
+
+      // Lever animation
+      lever.classList.add('pulled');
+      setTimeout(() => lever.classList.remove('pulled'), 300);
+
+      // Choose 3 names (or less if remaining < 3)
+      const pool = shuffle(remaining);
+      const three = pool.slice(0, Math.min(3, pool.length));
+
+      // If only 1 left, just pick it
+      if (three.length === 1) {
+        await spinReels([three[0], three[0], three[0]]);
+        await finishPick(three[0], three);
+        return;
+      }
+
+      // Spin reels
+      await spinReels(three);
+
+      // Random pick among the 3
+      const winner = randomPick(three);
+      await finishPick(winner, three);
+    }
+
+    function spinReels(finalNames) {
+      return new Promise(resolve => {
+        const duration = 2800 + Math.random() * 800; // ~3s
+        const strips = finalNames.map((final, i) => {
+          // Ensure variety in the strip
+          const strip = buildReelStrip(remaining, final, 45 + i * 5);
+          renderReel(reelInners[i], strip);
+          reels[i].classList.add('spinning');
+          return strip;
+        });
+
+        // Animate each reel with different timing (classic slot feel)
+        const stopTimes = [
+          duration * 0.55,
+          duration * 0.75,
+          duration
+        ];
+
+        strips.forEach((strip, i) => {
+          const itemH = 110;
+          const totalMove = (strip.length - 1) * itemH;
+          // Add slight overshoot then settle
+          const extra = 8 + Math.random() * 6;
+
+          // Force reflow
+          reelInners[i].offsetHeight;
+
+          reelInners[i].style.transition = `transform ${stopTimes[i] / 1000}s cubic-bezier(0.15, 0.85, 0.25, 1)`;
+          reelInners[i].style.transform = `translateY(-${totalMove}px)`;
+
+          setTimeout(() => {
+            reels[i].classList.remove('spinning');
+            // Small bounce settle
+            reelInners[i].style.transition = 'transform 0.18s ease-out';
+            // already at final position
+          }, stopTimes[i]);
+        });
+
+        setTimeout(resolve, duration + 200);
+      });
+    }
+
+    async function finishPick(winner, three) {
+      // Show the three names
+      threeNamesEl.innerHTML = three.map(n =>
+        `<span class="${n === winner ? 'picked' : ''}">${n}</span>`
+      ).join('');
+
+      // Dramatic pause then reveal
+      await wait(600);
+
+      resultName.textContent = winner;
+      resultName.classList.add('winner');
+
+      // Remove from remaining
+      remaining = remaining.filter(n => n !== winner);
+      selectedHistory.push(winner);
+
+      // Flash the chip
+      updateStudentsList();
+      const chip = studentsGrid.querySelector(`[data-name="${winner}"]`);
+      if (chip) {
+        chip.classList.add('just-selected');
+        setTimeout(() => chip.classList.remove('just-selected'), 700);
+      }
+
+      // Confetti
+      launchConfetti();
+
+      machine.classList.remove('spinning');
+      isSpinning = false;
+      setControlsEnabled(true);
+
+      if (remaining.length === 0) {
+        setTimeout(() => {
+          resultName.textContent = "🎉 Đã chọn hết!";
+        }, 2500);
+      }
+    }
+
+    function wait(ms) {
+      return new Promise(r => setTimeout(r, ms));
+    }
+
+    // ========== CONFETTI ==========
+    function launchConfetti() {
+      const canvas = document.getElementById('confetti');
+      const ctx = canvas.getContext('2d');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+
+      const particles = [];
+      const colors = ['#ffd700', '#ff6b6b', '#4ecdc4', '#ffe566', '#ff9f43', '#a29bfe'];
+
+      for (let i = 0; i < 80; i++) {
+        particles.push({
+          x: canvas.width / 2 + (Math.random() - 0.5) * 200,
+          y: canvas.height * 0.35,
+          vx: (Math.random() - 0.5) * 14,
+          vy: -Math.random() * 12 - 4,
+          size: Math.random() * 8 + 4,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          life: 1,
+          decay: 0.012 + Math.random() * 0.01,
+          rotation: Math.random() * 360,
+          rotSpeed: (Math.random() - 0.5) * 10
+        });
+      }
+
+      function frame() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        let alive = false;
+        particles.forEach(p => {
+          if (p.life <= 0) return;
+          alive = true;
+          p.x += p.vx;
+          p.y += p.vy;
+          p.vy += 0.25;
+          p.life -= p.decay;
+          p.rotation += p.rotSpeed;
+
+          ctx.save();
+          ctx.translate(p.x, p.y);
+          ctx.rotate(p.rotation * Math.PI / 180);
+          ctx.globalAlpha = Math.max(0, p.life);
+          ctx.fillStyle = p.color;
+          ctx.fillRect(-p.size / 2, -p.size / 2, p.size, p.size * 0.6);
+          ctx.restore();
+        });
+        if (alive) requestAnimationFrame(frame);
+        else ctx.clearRect(0, 0, canvas.width, canvas.height);
+      }
+      requestAnimationFrame(frame);
+    }
+
+    // ========== EVENTS ==========
+    lever.addEventListener('click', spin);
+    spinBtn.addEventListener('click', spin);
+
+    resetBtn.addEventListener('click', () => {
+      if (isSpinning) return;
+      remaining = [...ALL_STUDENTS];
+      selectedHistory = [];
+      resultName.textContent = '—';
+      resultName.classList.remove('winner');
+      threeNamesEl.innerHTML = '';
+      // Reset reels to first name
+      const init = remaining.slice(0, 3);
+      while (init.length < 3) init.push(remaining[0] || '—');
+      init.forEach((n, i) => renderReel(reelInners[i], [n]));
+      updateStudentsList();
+    });
+
+    // ========== INIT ==========
+    function init() {
+      const initNames = remaining.slice(0, 3);
+      while (initNames.length < 3) initNames.push(remaining[0] || '—');
+      initNames.forEach((n, i) => renderReel(reelInners[i], [n]));
+      updateStudentsList();
+    }
+
+    init();
+
+    // Resize confetti canvas
+    window.addEventListener('resize', () => {
+      const canvas = document.getElementById('confetti');
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    });
+  </script>
+</body>
+</html>
